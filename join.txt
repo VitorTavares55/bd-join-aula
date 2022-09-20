@@ -1,0 +1,2 @@
+No contexto do SQL, o JOIN é uma cláusula utilizada para, nas consultas (SELECT), realizar a junção de colunas de 2 ou mais tabelas de uma base de dados.
+O JOIN, dessa forma, permite a personalização das consultas, evitando a exibição de dados "desnecessários" e enfatizando os dados que são importantes para cada contexto em que um SELECT é realizado. 
