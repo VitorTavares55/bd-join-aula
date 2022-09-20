@@ -1,1 +1,1 @@
-aaaaaaaaaaaaaaaaaa
+Em SQL, o JOIN é um dos comandos de extrema importância para a consulta de dados, sendo capaz de trazer informações de diferentes entidades da Base de Dados. Em outras palavras, o JOIN é utilizado para consultar dados e registros de tabelas distintas, podendo trazer informações específicas ou gerais de toda e quaisquer tabelas que estejam sendo conectadas através desse comando.
