@@ -1,0 +1,4 @@
+O comando JOIN se trata de uma cláusula de manipulação de tabelas em SQL.
+Ela é utilizada como forma de buscar e relacionar os dados de duas tabelas, fornecendo um resultado que integra ambos.
+Ou seja, o JOIN é usado para pegar o relacionamento de tabelas e na hora de realizar seu select, utilizar a junção de
+ambas para gerar uma tabela resultando que atenda a necessidade esperada.
