@@ -1,2 +1,21 @@
-No contexto do SQL, o JOIN é uma cláusula utilizada para, nas consultas (SELECT), realizar a junção de colunas de 2 ou mais tabelas de uma base de dados.
-O JOIN, dessa forma, permite a personalização das consultas, evitando a exibição de dados "desnecessários" e enfatizando os dados que são importantes para cada contexto em que um SELECT é realizado. 
+No contexto do SQL, o JOIN é uma cláusula utilizada para, nas consultas (SELECT), realizar a junção de colunas de 2 ou mais tabelas de uma base de dados. Sua sintaxe
+consiste na aplicação do JOIN em um SELECT, de duas em duas tabelas que devem possuir uma associação (relacionamento) entre si.
+
+Para realizar uma junção, o script é escrito da seguinte forma: após a cláusula SELECT, devem ser projetados os atributos que devem ser retornados; quando os atributos
+pertencem a mais de uma tabela, ao projeta-los, escreve-se tabela.atributo, identificando a qual entidade eles pertencem; por exemplo, cidade.cidade (tabela cidade -
+atributo cidade) e estado.sigla (tabela estado - atributo sigla). Depois, as tabelas são referenciadas com a cláusula FROM, em que é indicado uma das tabela e, em
+seguida, é utilizado o INNER JOIN para unir a tabela anterior com a outra; em seguida, utiliza-se o ON, dizendo que a chave primária de uma tabela e a chave
+estrangeira da outra são iguais (ou equivalentes); nesse caso, o atributo idestado da tabela cidade (em que ele é chave estrangeira) é igual ao idestado de estado (no
+qual ele é chave primária). O comando, então, ficaria da seguinte forma:
+
+SELECT cidade.cidade, estado.sigla FROM estado INNER JOIN cidade ON cidade.idestado - estado.idestado;
+
+Também é possível realizar consultas impondo condições. Para tanto, usamos é utilizado o WHERE. Essa cláusula permite que seja definido um parâmetro para busca dos
+registros desejados.  Por exemplo, Seguindo o script do exemplo anterior, adicionando WHERE no final do comando, é possível filtrar o retorno dos atributos e dados
+solicitados quando a sigla (estado.sigla) for igual a determinado valor. A condição deve ser sempre escrita entre aspas simples. O script ficaria dessa forma:
+
+SELECT cidade.cidade, estado.sigla FROM estado INNER JOIN cidade ON cidade.idestado - estado.idestado WHERE estado.sigla = 'PR';
+
+Dessa forma, apenas as cidades registradas que pertencem ao Paraná seriam retornadas na consulta, ou seja, somente os que atendem a condição. O JOIN, dessa forma,
+permite apersonalização das consultas, evitando a exibição de dados "desnecessários"  e enfatizando os dados que são importantes para cada contexto em que um SELECT é
+realizado. 
