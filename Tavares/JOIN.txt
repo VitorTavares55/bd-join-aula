@@ -18,7 +18,9 @@ nome do professor.
 
 -----------------------------------------------------------------------
 
-Tendo a explicação e o exemplo de consulta com JOIN, podemos compreender que a forma mais fácil de entender o funcionamento desse mecanismo é a apresentação de
-relação das tabelas em uma nova tabela, ou seja, quando precisar apresentar uma tabela com valores específicos de duas tabelas relacionadas, ao invés de precisar
-selecionar elas separadamente ou criar uma tabela nova inteira só para apresentar essa relaçao, o comando JOIN nos permite gerar uma tabela de apresentação que 
-une os valores, poupando processamento desnecessário e assim otimizando o tempo de resposta do SGBD.
+Tendo a explicação e o exemplo de consulta com JOIN, podemos compreender que a forma mais fácil de identificar a necessidade de sua utilização e de seu funcionamento,
+é compreender a teoria de como ele foi criado, qual o propósito foi visado para sua criação, como ele deve ser aplicado e porque ele pode permitir "atalhos" para
+consultas que seriam de alta complexidade.
+Assim aplicando este pensamento a necessidade, teriamos uma situação que seria necessário apresentar uma nova tabela com valores específicos de outras duas tabelas
+relacionadas, ao invés de precisar selecionar elas separadamente ou criar uma tabela nova inteira só para apresentar essa relaçao, o comando JOIN nos permite geraruma
+tabela de apresentação que une os valores, poupando processamento desnecessário e assim otimizando o tempo de resposta do SGBD.
