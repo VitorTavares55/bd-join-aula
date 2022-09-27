@@ -7,7 +7,7 @@ ON e.id = c.estado_id;                                 /* Condição para JOIN: 
 
 
 
-É possível usar mais de um JOIN em uma seleção, contando que haja mais de duas tabelas e uma relação entre cada uma delas. Exemplo:
+É possível usar mais de um JOIN em uma seleção, contanto que haja mais de duas tabelas e uma relação entre cada uma delas. Exemplo:
 
 SELECT c.nome CIDADE, e.sigla UF, p.nome PAÍS          /* Definindo as colunas selecionadas e seus apelidos. */
 FROM pais p JOIN estado e ON p.id = e.pais_id          /* Definindo a junção de "pais" e "estado", utilizando a referência à PK de pais como condição. */
