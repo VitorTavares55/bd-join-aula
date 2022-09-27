@@ -1,19 +1,50 @@
-O comando JOIN é usado para pesquisar os dados inseridos entre duas tabelas. É importante que se realize o comando utilizando uma condição que evite combinações de dados que não façam sentido. Eis um exemplo do uso de JOIN.
+O comando JOIN é usado para pesquisar os dados inseridos entre duas tabelas. É importante que se realize o comando utilizando uma condição que evite combinações de
+dados que não façam sentido. Eis um exemplo do uso de JOIN:
 
 SELECT c.nome CIDADE, e.nome ESTADO, e.sigla UF        /* Definindo quais colunas estão sendo selecionadas e a quais tabelas cada uma pertence. */
 FROM estado e JOIN cidade c cidade                     /* Definindo a junção das tabelas "estado" e "cidade" e as apelidando com suas respectivas iniciais. */
 ON e.id = c.estado_id;                                 /* Condição para JOIN: a cidade deve referenciar uma PK de um estado para exibir as informações. */
 
+
+
 É possível usar mais de um JOIN em uma seleção, contando que haja mais de duas tabelas e uma relação entre cada uma delas. Exemplo:
 
 SELECT c.nome CIDADE, e.sigla UF, p.nome PAÍS          /* Definindo as colunas selecionadas e seus apelidos. */
 FROM pais p JOIN estado e ON p.id = e.pais_id          /* Definindo a junção de "pais" e "estado", utilizando a referência à PK de pais como condição. */
-JOIN cidade c ON e.id = c.estado_id                    /* Definindo a junção de "estado e "cidade", utilizando a referência à PK de estado como condição. */
+JOIN cidade c ON e.id = c.estado_id;                   /* Definindo a junção de "estado e "cidade", utilizando a referência à PK de estado como condição. */
 
-Há diversos tipos de JOIN que podem ser usados na linguagem SQL, e cada um fornecerá um tipo diferente de resultado na pesquisa. Por exemplo, há o INNER JOIN, que é o JOIN padrão, que foi utilizado nos exemplos anteriores. O INNER JOIN entregará APENAS dados relacionados, contanto que haja uma condição.
 
-Outros tipos de JOIN são o LEFT JOIN e o RIGHT JOIN. Ao contrário do caso padrão, o LEFT JOIN e o RIGHT JOIN selecionam todas as linhas de uma tabela, mesmo que não haja uma referência declarada entre as tabelas no SELECT. Por exemplo:
 
-SELECT e.sigla UF                                      /* Definindo a coluna selecionada e seus apelidos. */
-FROM pais p LEFT JOIN estado e ON p.id = e.pais_id     /* Definindo a junção de "pais" e "estado", utilizando a referência à PK de pais como condição. */
-RIGHT JOIN cidade c ON e.id = c.estado_id              /* Definindo a junção de "estado e "cidade", utilizando a referência à PK de estado como condição. */
+Há diversos tipos de JOIN que podem ser usados na linguagem SQL, e cada um fornecerá um tipo diferente de resultado na pesquisa. Por exemplo, há o INNER JOIN, que é o
+JOIN padrão, que foi utilizado nos exemplos anteriores. O INNER JOIN entregará APENAS dados relacionados, contanto que haja uma condição.
+
+Outros tipos de JOIN são o LEFT JOIN e o RIGHT JOIN. Ao contrário do caso padrão, o LEFT JOIN e o RIGHT JOIN selecionam todas as linhas de uma tabela de acordo com usa
+posição em relação à declaração do JOIN; a tabela que está na posição determinada no JOIN terá seus dados exibidos independentemente da condição ser cumprida ou não.
+No caso do LEFT JOIN, a tabela declarada à sua esquerda não dependerá da condição para ser exibida, e com o RIGHT JOIN, a tabela declara à direita é que não dependerá
+da condição. Caso a condição seja cumprida, o SELECT exibirá as informações normalmente; caso não sejam, exibirá apenas as informações da tabela da posição correta
+enquanto os registros da outra tabela apresentarão o valor NULL. Por exemplo:
+
+SELECT c.nome CIDADE, e.sigla UF, p.nome PAÍS          /* Definindo as colunas selecionadas e seus apelidos. */
+FROM pais p LEFT JOIN estado e ON p.id = e.pais_id     /* Definindo a junção de "pais", que está à esquerda do LEFT JOIN, e "estado". */
+RIGHT JOIN cidade c ON e.id = c.estado_id;             /* Definindo a junção de "estado e "cidade", que está à direita do RIGHT JOIN. */
+
+
+
+Além desses, há também a junção FULL JOIN, que pode ser entendida como uma combinação do LEFT JOIN e do RIGHT JOIN, uma "junção completa". Isso significa que o SELECT
+exibirá qualquer junção entre duas tabelas desde que uma das tabelas selecionadas satisfaça a condição; caso apenas uma não satisfaça, esta receberá os valores
+NULL para suas colunas na linha em questão. Exemplo:
+
+SELECT c.nome CIDADE, e.sigla UF, p.nome PAÍS          /* Definindo as colunas selecionadas e seus apelidos. */
+FROM pais p FULL JOIN estado e ON p.id = e.pais_id     /* Definindo a junção de "pais" e "estado" com FULL. */
+FULL JOIN cidade c ON e.id = c.estado_id;              /* Definindo a junção de "estado e "cidade", que está à direita do RIGHT JOIN. */
+
+
+
+E por fim há o CROSS JOIN, que representa o produto cartesiano entre duas tabelas, ou seja, para cada linha de uma tabela haverá uma combinação com todas as linhas da
+outra tabela que faz parte da junção. Caso uma tabela tenha n linha e a outra m linhas, o número de linhas apresentado pelo SELECT será n X m; um CROSS JOIN entre uma
+tabela de 3 linhas com uma de 5 geraria 15 resultados. Ao contrário das demais junções, o CROSS JOIN não depende de uma condição, e entregará qualquer combinação
+possível, mesmo que os dados não estejam relacionados. Exemplo:
+
+SELECT c.nome CIDADE, e.sigla UF, p.nome PAÍS          /* Definindo as colunas selecionadas e seus apelidos. */
+FROM pais p CROSS JOIN estado e                        /* Definindo a junção de "pais" e "estado" com CROSS. Note a falta de condição ON. */
+CROSS JOIN cidade c;                                   /* Definindo a junção de "estado e "cidade". Mais uma vez sem a condição ON. */
