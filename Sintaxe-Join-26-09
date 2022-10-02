@@ -1,0 +1,21 @@
+SINTAXE DAS JUNÇÕES DE JOIN:
+Para compreender a sintaxe de JOIN, inicialmente é necessário compreender que seu funcionamento é completamente atrelado a teoria dos conjuntos matemáticos, ou seja,
+todas relações que podem ser feitas nos conjuntos como união, subtração, pertencimento e entre outros, pode ser realizado também nas tabelas do banco de dados.
+Para a compreensão das funções JOIN, também é necessário entender que a interseçãoN entre as tabelas é fundamental, ou seja, precisa existir pelo menos um dado
+que identifique as tabelas e que esteja contido em outra tabela também, esse dado de identificação é a PK e o dado contido em outra tabela é a FK, seu pertencimento em
+duas tabelas é o que forma o relacionamento entre elas, sendo esse fundamental para a sintaxe do JOIN.
+
+--------------------------------
+Exemplo:
+SELECT cliente.nome nome_cliente, cidade.nome cidade       --> Especificação das colunas em que os dados que serão tratados devem ser buscados.
+FROM cidade, cliente                                       --> Em quais tabelas esses colunas com o dados devem ser buscados.
+WHERE cidade.id = cliente.cidade_id;                       --> As condições de formatação e de seleção de dados que devem ser seguidos pela busca.
+--------------------------------
+
+ERROS COMUNS:
+ --> Tentativa de seleção com WHERE entre tabelas que não são relacionadas.
+ --> Não definição de todas as tabelas que precisam ser buscados os dados para relacionamento.
+ --> Não percorrimento de todas as relações para chegar ao dados buscados, pulando etapas e falhando durante o processo e/ou repetindo dados e processos.
+ --> Excesso de junções de forma desnecessária, fazendo buscas e repetições que aumentam o tempo de resposta do banco de forma a prejudicar a responsividade.
+ --> Erro de especificação de dados que devem ser comparados, comparando dados que não possuem interseção entre as tabelas.
+ --> Repetição de WHERE de forma a criar diferentes condições para a seleção e exibição ser realizada.
