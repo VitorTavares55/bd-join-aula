@@ -21,12 +21,7 @@ Sintaxe
 11.	Liste o nome dos produtos, o preço de venda e o nome da unidade de medida.
 12.	Liste o nome dos produtos da marca "Coca-cola".
 13. DESAFIO!!! Liste os nomes dos clientes do estado de São Paulo que já compraram o produto 'REFRIGERANTE COCA-COLA GARRAFA PET 3 L'.
-Semântica
-1.	Em que caso devemos utilizar o JOIN? Quais tabelas podem ser utilizando em um comando JOIN?
-2.	No caso do JOIN, o que é condição de junção. Qual cuidado devemos ter. 
-3.	Em relação a sintaxe, em um JOIN não é necessário utilizarmos condições (WHERE) - o comando irá executar normalmente. Porém, em questão de semântica, a cada junção é necessário ter ao menos 1 condição. Explique.
-4.	O que é produto cartesiano? Como funciona? Qual a relação com o JOIN.
-5.	Na elaboração de um consulta que envolve 1587 tabelas, serão necessários, quantas condições de junção?
+
  */
  -- 1.	Escreva o comando que liste os nomes de todas as cidades e as respectivas siglas do estado.
  SELECT cidade.nome cidade, estado.sigla uf FROM estado, cidade WHERE estado.id = cidade.estado_id;
@@ -57,3 +52,42 @@ SELECT estado.nome FROM estado, cliente, cidade WHERE cidade.id = cliente.cidade
 
 -- 10.	Escreva o comando que liste todas as vendas e o nome do respectivo funcionário que a realizou.
 SELECT venda.id venda, funcionario.nome funcionario FROM venda, funcionario WHERE venda.funcionario_id = funcionario.id;
+
+-- 11.	Liste o nome dos produtos, o preço de venda e o nome da unidade de medida.
+SELECT produto.nome produto, item_venda.preco_unidade preco, unidade_medida.nome medida FROM produto, item_venda, unidade_medida WHERE produto.id = item_venda.produto_idAND produto.unidade_medida_id = unidade_medida.id;
+
+-- 12.	Liste o nome dos produtos da marca "Coca-cola".
+SELECT produto.nome FROM produto, marca WHERE produto.marca_id = marca.id AND marca.nome = "Coca-cola";
+
+-- 13. DESAFIO!!! Liste os nomes dos clientes do estado de São Paulo que já compraram o produto 'REFRIGERANTE COCA-COLA GARRAFA PET 3 L'.
+SELECT cliente.nome, estado.sigla, produto.nome FROM cliente, cidade, estado, venda, item_venda, produto WHERE cliente.cidade_id = cidade.id AND cidade.estado_id = estado.id AND estado.nome = "SÃO PAULO" AND cliente.id = venda.cliente_id AND venda.id = item_venda.venda_id AND produto.id = item_venda.produto_id AND produto.nome = "REFRIGERANTE COCA-COLA GARRAFA PET 3 L";
+
+/*
+Semântica
+1.	Em que caso devemos utilizar o JOIN? Quais tabelas podem ser utilizando em um comando JOIN?
+-- Deve-se utilizar o JOIN quando temos interesse de buscar dados que estão contidos em diferentes tabelas, exibilos e 
+trata-los em uma nova tabela. O JOIN só pode ser utilizado em tabelas que possuam relacionamento entre elas, caso contrário, não estara correto.
+
+
+2.	No caso do JOIN, o que é condição de junção. Qual cuidado devemos ter. 
+--  A condição de junção define o modo como duas tabelas se relacionam em uma consulta. Dessa forma, podemos especificar a coluna de cada tabela 
+que devem ser agrupadas, especificando a chave estrangeira e a chave associada na outra tabela. Ou comparando valores de colunas, 
+usando operadores de igualdade e diferença.
+
+
+3.	Em relação a sintaxe, em um JOIN não é necessário utilizarmos condições (WHERE) - o comando irá executar normalmente. Porém, em questão de semântica, a cada junção é necessário ter ao menos 1 condição. Explique.
+-- Apesar de não haver necessidade para a utilização do WHERE no JOIN, a utilização de condições a cada junção servem para 
+delimitar quais dados devem ser buscados e agrupados, sem suas condições teríamos apenas dados de semelhança buscado em ambas tabelas.
+
+
+4.	O que é produto cartesiano? Como funciona? Qual a relação com o JOIN.
+-- O Produto cartesiano se trata da junção dos dados contidos em duas tabelas, que somados 
+geram uma terceira tabela que contém todos os dados das duas anteriores. 
+A relação do produto cartesiano com o JOIN é da fusão dos valores contidos entre tabelas, 
+usando para isso os valores da interseção entre os conjuntos para especificar seus dados.
+
+5.	Na elaboração de um consulta que envolve 1587 tabelas, serão necessários, quantas condições de junção?
+-- Para a elaboração desta consulta, serão necessárias 1586 junções, pois para as junções de JOIN é necessário percorrer 
+as tabelas por meio de suas relações, tabelas não relacionadas não podem ser associadas no JOIN.
+*/
+
