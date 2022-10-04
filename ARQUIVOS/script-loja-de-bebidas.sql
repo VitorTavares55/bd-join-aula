@@ -35,9 +35,23 @@ id INT NOT NULL AUTO_INCREMENT
 
 CREATE TABLE funcionario (               -- criando a tabela funcionario
 id INT NOT NULL AUTO_INCREMENT
-,nome VARCHAR(200)  NOT NULL
-,cpf VARCHAR(14) NOT NULL 
-,cidade_id INT NOT NULL 
+,nome VARCHAR(100)  NOT NULL
+,apelido VARCHAR(100) NOT NULL
+,cpf CHAR(14) NOT NULL
+,endereco VARCHAR(100) NOT NULL
+,endereco_numero VARCHAR(20) NOT NULL
+,endereco_completo VARCHAR(100) NOT NULL
+,endereco_bairro VARCHAR(100) NOT NULL
+,cep VARCHAR(10) NOT NULL
+,fone VARCHAR(15) NOT NULL
+,fone_d VARCHAR(15) NOT NULL
+,contato VARCHAR(100) NOT NULL
+,status CHAR(1) NOT NULL DEFAULT 'A'
+,data_cadastro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+,data_nascimento DATE NOT NULL
+,email VARCHAR(100) NOT NULL
+,cidade_id INT NOT NULL
+,ocupacao VARCHAR(100) NOT NULL
 ,CONSTRAINT pk_funcionario PRIMARY KEY (id)
 ,CONSTRAINT fk_funcionario_cidade FOREIGN KEY (cidade_id) REFERENCES cidade (id)
 ); 
