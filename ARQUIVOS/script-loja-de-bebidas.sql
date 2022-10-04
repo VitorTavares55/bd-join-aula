@@ -104,7 +104,8 @@ CREATE TABLE venda (               -- criando a tabela venda
 id INT NOT NULL AUTO_INCREMENT
 ,data DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ,funcionario_id INT NOT NULL 
-,cliente_id INT NOT NULL 
+,cliente_id INT NOT NULL
+,total DECIMAL(12,2) NOT NULL
 ,CONSTRAINT pk_venda PRIMARY KEY (id)
 ,CONSTRAINT fk_venda_funcionario FOREIGN KEY (funcionario_id) REFERENCES funcionario (id) 
 ,CONSTRAINT fk_venda_cliente FOREIGN KEY (cliente_id) REFERENCES cliente (id)
