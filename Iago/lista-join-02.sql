@@ -27,22 +27,61 @@ Neste contexto, faça as consultas necessárias para descobrir o possível nome 
 SELECT cid.nome FROM cidade cid, estado est WHERE est.id = cid.estado_id AND (est.nome = "PARANÁ" OR est.sigla = "PR");
 
 /* Exercício #2 */
-SELECT forc.nome, forc.
+SELECT forn.nome, forn.fone FROM fornecedor forn, cidade cid WHERE cid.id = forn.cidade_id
+AND forn.status = 'A' AND cid.nome = "PARANAVAÍ";
 
 /* Exercício #3 */
+SELECT cli.nome FROM cliente cli, cidade cid WHERE cid.id = cli.cidade_id
+AND (cid.nome = "MARINGÁ" OR cid.nome = "PARANAVAÍ" OR cid.nome = "CIANORTE");
 
 /* Exercício #4 */
+SELECT func.nome, func.fone FROM funcionario func, cidade cid, estado est
+WHERE func.cidade_id = cid.id AND cid.estado_id = est.id
+AND func.status = 'A' AND (est.sigla = "PR" OR est.sigla = "SC" OR est.sigla = "RS");
 
 /* Exercício #5 */
+SELECT pro.nome, umed.nome FROM unidade_medida umed, produto pro, item_venda iven, venda ven
+WHERE umed.id = pro.unidade_medida_id AND pro.id = iven.produto_id AND iven.venda_id = venda.id
+AND venda.id = 3;
 
 /* Exercício #6 */
+SELECT func.nome FROM funcionario func, venda ven, item_venda iven, produto pro
+WHERE func.id = ven.funcionario_id AND ven.id = iven.venda_id AND iven.produto_id = produto.id
+AND produto.nome = "REFRIGERANTE COCA-COLA GARRAFA PET 3 L";
 
 /* Exercício #7 */
+SELECT forc.nome FROM fornecedor forc, cidade cid, estado est
+WHERE forc.cidade_id = cidade.id AND cidade.estado_id = estado.id
+AND (est.sigla = "PR" OR est.sigla = "RN" OR est.sigla = "MT");
 
 /* Exercício #8 */
+SELECT pro.nome FROM produto pro, item_venda iven, venda ven
+WHERE produto.id = iven.produto_id AND iven.venda_id = venda.id
+AND DATE(ven.data) = "2022/10/03";
 
 /* Exercício #9 */
+SELECT cli.nome, func.nome FROM venda ven, funcionario fun, cliente cli, cidade cid, estado est
+WHERE (ven.cliente_id = cliente.id AND ven.funcionario_id = func.id)
+AND (cid.id = func.cidade_id AND cid.id = cli.cidade_id) AND cidade.estado_id = estado id
+AND cli.nome = func.nome AND cli.cidade_id = func.cidade_id;
 
 /* Exercício #10 */
+SELECT DATE(ven.data) "DATA DA VENDA", cid.nome "CIDADE", est.sigla "UF" fun.nome FUNCIONÁRIO, fun.cpf "CPF DO FUNCIONÁRIO", cli.nome CLIENTE, cli.cpf_cnpj "CPF DO CLIENTE"
+FROM venda ven, funcionario fun, cliente cli, cidade cid, estado est
+WHERE (ven.cliente_id = cliente.id AND ven.funcionario_id = func.id)
+AND (cid.id = func.cidade_id AND cid.id = cli.cidade_id) AND cidade.estado_id = estado id
+AND cli.cpf_cnpj = 32110992395 AND ven.total > 30 ORDER BY ven.data DESC;
+
+-- Para realizar a pesquisa e determinar quem é o funcionário responsável por essa venda, é preciso determinar
+-- Quais dessas informações fornecidas pela Sophia são relevantes para a pesquisa. Tendo isso dito, tanto
+-- o nome de Sophia quanto sua cidade natal são informações que eu considerei irrelevantes; o nome por não ser
+-- necessariamente único e a cidade natal por não necessariamente ser a mesma onde a venda foi realizada.
+-- Já o CPF de Sophia foi usado por mim como chave candidata por ser um documento único e válido em todo o
+-- território nacional, solucionando os problemas mencionados nas duas alternativas anteriores. Ao mesmo
+-- tempo, eu determinei que os resultados fossem ordenados de acordo com a data da venda, da mais recente à
+-- mais antiga, seguindo a hipótese de que Sophia relatou seu problema pouco após o ocorrido, o que permitiria
+-- ao gerente determinar qual funcionário foi o responsável pelo equívoco ou ao menos uma lista de suspeitos.
+-- Para evitar informações desnecessárias, também determinei que o resultado deve desconsiderar vendas com o
+-- total pago inferior ou equivalente a 30 reais, o pior cenário possível.
 
 /* Exercício #11 */
