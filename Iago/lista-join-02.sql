@@ -69,8 +69,8 @@ AND cli.nome = func.nome AND cli.cidade_id = func.cidade_id;
 SELECT DATE(ven.data) "DATA DA VENDA", cid.nome "CIDADE", est.sigla "UF", fun.nome FUNCIONÁRIO, fun.cpf "CPF DO FUNCIONÁRIO", cli.nome CLIENTE, cli.cpf_cnpj "CPF DO CLIENTE"
 FROM venda ven, funcionario fun, cliente cli, cidade cid, estado est
 WHERE (ven.cliente_id = cliente.id AND ven.funcionario_id = func.id)
-AND (cid.id = func.cidade_id AND cid.id = cli.cidade_id) AND cidade.estado_id = estado id
-AND cli.cpf_cnpj = 32110992395 AND ven.total > 30 ORDER BY ven.data DESC;
+AND (cid.id = func.cidade_id AND cid.id = cli.cidade_id) AND cidade.estado_id = estado.id
+AND cli.cpf_cnpj = 32110992395 AND ven.total > 30 AND func.cidade_id = cli.cidade_id ORDER BY ven.data DESC;
 
 -- Para realizar a pesquisa e determinar quem é o funcionário responsável por essa venda, é preciso determinar
 -- Quais dessas informações fornecidas pela Sophia são relevantes para a pesquisa. Tendo isso dito, tanto
@@ -82,6 +82,8 @@ AND cli.cpf_cnpj = 32110992395 AND ven.total > 30 ORDER BY ven.data DESC;
 -- mais antiga, seguindo a hipótese de que Sophia relatou seu problema pouco após o ocorrido, o que permitiria
 -- ao gerente determinar qual funcionário foi o responsável pelo equívoco ou ao menos uma lista de suspeitos.
 -- Para evitar informações desnecessárias, também determinei que o resultado deve desconsiderar vendas com o
--- total pago inferior ou equivalente a 30 reais, o pior cenário possível.
+-- total pago inferior ou equivalente a 30 reais, o pior cenário possível. Por fim, eu determinei que a cidade
+-- de referência da Sophia deve ser a mesma que a do funcionário que será buscado, desconsiderando a informação
+-- da cidade natal, mas sim da cidade em que ela, enquanto cliente, realizou a compra.
 
 /* Exercício #11 */
