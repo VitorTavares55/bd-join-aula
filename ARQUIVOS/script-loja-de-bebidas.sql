@@ -103,7 +103,29 @@ produto_id INT NOT NULL
 ,preco_unidade DECIMAL(14,2) NOT NULL 
 ,CONSTRAINT fk_item_venda_produto FOREIGN KEY (produto_id) REFERENCES produto (id) 
 ,CONSTRAINT fk_item_venda_venda FOREIGN KEY (venda_id) REFERENCES venda (id) 
-); 
+);
+
+CREATE TABLE fornecedor (
+id INT NOT NULL AUTO_INCREMENT
+,nome VARCHAR(100) NOT NULL
+,apelido VARCHAR(100) NOT NULL
+,cpf_cnpj VARCHAR(18) NOT NULL
+,endereco VARCHAR(100) NOT NULL
+,endereco_numero VARCHAR(20) NOT NULL
+,endereco_completo VARCHAR(100) NOT NULL
+,endereco_bairro VARCHAR(100) NOT NULL
+,cep VARCHAR(10) NOT NULL
+,fone VARCHAR(15) NOT NULL
+,fone_d VARCHAR(15) NOT NULL
+,contato VARCHAR(100) NOT NULL
+,status CHAR(1) NOT NULL
+,data_cadastro DATETIME NOT NULL
+,data_nascimento DATE NOT NULL
+,email VARCHAR(100) NOT NULL
+,cidade_id INT NOT NULL
+,CONSTRAINT pk_fornecedor PRIMARY KEY (id)
+,CONSTRAINT fk_cidade_id FOREIGN KEY (cidade_id) REFERENCES cidade (id)
+);
 
 INSERT INTO estado (nome, sigla, ativo, data_cadastro) VALUES ('PARANÁ','PR','S','2015-2-25');
 INSERT INTO estado (nome, sigla, ativo, data_cadastro) VALUES ('SÃO PAULO','SP','S','2015-10-31');
