@@ -9,6 +9,7 @@ SELECT
     , [... outras colunas]
 FROM {nome_tabela1}, {nome_tabela2}
 WHERE pk = fk;
+*/
 
 -- Nível 1 (aquecimento)
 -- 1.	Liste os nomes de todas as cidades ATIVAS do estado PARANÁ.
