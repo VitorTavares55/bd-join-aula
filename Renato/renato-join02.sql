@@ -36,4 +36,22 @@ mas possui as seguintes informações:
 Neste contexto, faça as consultas necessárias para descobrir o possível nome do funcionário. Justifique!
 11. De acordo com o projeto do SEU COLEGA, elabore uma consulta RELEVANTE que ajude de alguma forma a empresa. 
 A consulta deve envolver mais de 4 tabelas.
+ */
+ 
+ -- 1.	Liste os nomes de todas as cidades ATIVAS do estado PARANÁ.
+ SELECT cidade.nome FROM cidade WHERE cidade.ativo = 'S' AND cidade.estado_id = 1; 
+ 
+ -- 2.	Liste o nome e o telefone dos fornecedores que estão ativos e moram em PARANAVAÍ.
+ -- A tabela fornecedores não existe nesta base de dados.
+
+-- 3.	Escreva o comando que liste os nomes dos clientes que moram nas seguintes cidades: MARINGÁ, PARANAVAÍ e CIARNORTE. 
+SELECT cliente.nome FROM cliente, cidade WHERE cidade.id = cliente.cidade_id AND (cidade.nome = "MARINGÁ" OR cidade.nome = "PARANAVAÍ" OR cidade.nome = "CIANORTE");
+
+-- 4.	Liste o nome e o telefone dos funcionarios ATIVOS que moram na região SUL.
+ -- Na tabela funcionario, não existe uma coluna chamada "telefone"
+ 
+ -- 5. Informe o nome dos produtos e a respectiva unidade de medida da venda com o código 3.
+ SELECT produto.nome, unidade_medida.nome FROM produto, venda, item_venda, unidade_medida WHERE produto.unidade_medida_id = unidade_medida.id AND produto.id = item_venda.produto_id AND item_venda.venda_id = venda.id AND venda.id = 3;
+
+-- 6. Liste os nomes dos funcionários que já venderam o produto 'REFRIGERANTE COCA-COLA GARRAFA PET 3 L'.
  
