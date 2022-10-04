@@ -66,7 +66,7 @@ AND (cid.id = func.cidade_id AND cid.id = cli.cidade_id) AND cidade.estado_id = 
 AND cli.nome = func.nome AND cli.cidade_id = func.cidade_id;
 
 /* Exercício #10 */
-SELECT DATE(ven.data) "DATA DA VENDA", cid.nome "CIDADE", est.sigla "UF" fun.nome FUNCIONÁRIO, fun.cpf "CPF DO FUNCIONÁRIO", cli.nome CLIENTE, cli.cpf_cnpj "CPF DO CLIENTE"
+SELECT DATE(ven.data) "DATA DA VENDA", cid.nome "CIDADE", est.sigla "UF", fun.nome FUNCIONÁRIO, fun.cpf "CPF DO FUNCIONÁRIO", cli.nome CLIENTE, cli.cpf_cnpj "CPF DO CLIENTE"
 FROM venda ven, funcionario fun, cliente cli, cidade cid, estado est
 WHERE (ven.cliente_id = cliente.id AND ven.funcionario_id = func.id)
 AND (cid.id = func.cidade_id AND cid.id = cli.cidade_id) AND cidade.estado_id = estado id
