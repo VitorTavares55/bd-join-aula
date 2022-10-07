@@ -87,3 +87,14 @@ AND cli.cpf_cnpj = 32110992395 AND ven.total > 30 AND func.cidade_id = cli.cidad
 -- da cidade natal, mas sim da cidade em que ela, enquanto cliente, realizou a compra.
 
 /* Exercício #11 */
+-- Baseado no DER da Carla.
+SELECT cli.nome CLIENTE, func.nome "FUNCIONÁRIO RESPONSÁVEL", pr_serv.valor_final "VALOR DO SERVIÇO",
+pr_serv.tempo_realizacao "TEMPO DE SERVIÇO", proc.descricao "DESCRIÇÃO DO PROCEDIMENTO"
+FROM funcionario func, cliente cli, solicitacao_servico so_serv, procedimento proc, prestacao_servico pr_serv
+WHERE func.id_funcionario = so_serv.id_funcionario AND cli.id_cliente = so_serv.id_cliente
+AND so_serv.id_solicitacao_servico = pr_serv.id_solicitacao_servico AND proc.id_procedimento = pr_serv.id_procedimento
+AND cli.cpf = 99955544423;
+
+-- Com essa consulta, será possível verificar os serviços que o cliente de CPF 999.555.444-23 solicitou, apresentando seu nome, o nome do funcionário responsável, o
+-- valor do serviço, o tempo de realização do serviço e a descrição do procedimento realizado. A mesma consulta pode ser realizada com qualquer pessoa que tenha feito
+-- algum serviço com a empresa mediante o uso de seu CPF como chave candidata.
