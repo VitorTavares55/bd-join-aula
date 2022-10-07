@@ -67,16 +67,12 @@ AND venda.`data` = "2022-09-26 19:51:27";
 -- 9. Feliz com um bom atendimento, um determinado cliente entra em contato com o gerente para enviar uma lembrança ao funcionário.
 -- O problema é que, além de não informar a sua identidade, ele não lembra do nome do funcionário. Sabe apenas que,na conversa, moraram 
 -- na mesma cidade e possuem o mesmo nome. Neste contexto, faça as consultas necesárias para identificar o funcionário. 
-SELECT funcionario.nome funcionario, cliente.nome cliente
-FROM funcionario, cliente, venda
-WHERE cliente.nome = funcionario.nome;
 
-SELECT funcionario.nome, cliente.nome, venda.`data`
-FROM funcionario, cliente, venda
+SELECT cliente.nome, funcionario.nome
+FROM venda, funcionario, cliente
 WHERE venda.funcionario_id = funcionario.id
 AND venda.cliente_id = cliente.id
-AND funcionario.nome = "ANDRÉ"
-AND cliente.nome = "ANDRÉ";
+AND cliente.nome = funcionario.nome;
 
 
 -- 10. Um cliente entra em contato com o gerente solicitando um possível erro de troco. O cliente não lembra o nome do funcionário, 
@@ -86,5 +82,19 @@ AND cliente.nome = "ANDRÉ";
  -- (3) cidade onde cliente nasceu: BAURU/SÃO PAULO
  -- (4) a cliente alega estar faltando 30 reais
 -- Neste contexto, faça as consultas necessárias para descobrir o possível nome do funcionário. Justifique!
+SELECT funcionario.nome
+FROM funcionario, cliente, venda
+WHERE venda.funcionario_id = funcionario.id
+AND venda.cliente_id = cliente.id
+AND cliente.cpf_cnpj = "321.109.923-95";
+
+-- Com as tabelas disponibilizadas, a consulta mais aproximada que pode ser feita é a dos nomes de Otávio Correia e Marcos Goncalves.
+
+
 -- 11. De acordo com o projeto do SEU COLEGA, elabore uma consulta RELEVANTE que ajude de alguma forma a empresa. 
 -- A consulta deve envolver mais de 4 tabelas.
+SELECT cliente.nome, procedimento.nome
+FROM procedimento, pestacao_servico, solicitacao_servico, cliente
+WHERE prestacao_servico.id_procedimento = procedimento.id_procedimento
+AND prestacao_servico.id_solicitacao_servico = solicitacao_servico.id_solicitacao_servico
+AND solicitacao_servico.id_cliente = cliente.id_cliente;
