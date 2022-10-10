@@ -52,8 +52,8 @@ SELECT funcionario.nome FROM funcionario, venda, item_venda, produto WHERE funci
 SELECT produto.nome FROM produto, venda, item_venda WHERE venda.id = item_venda.venda_id AND item_venda.produto_id = produto.id AND venda.data = '2022-09-26 20:05:00';
 
 -- 9. Feliz com um bom atendimento, um determinado cliente entra em contato com o gerente para enviar uma lembrança ao funcionário.
-O problema é que, além de não informar a sua identidade, ele não lembra do nome do funcionário. Sabe apenas que,na conversa, moraram 
-na mesma cidade e possuem o mesmo nome. Neste contexto, faça as consultas necesárias para identificar o funcionário.
+-- O problema é que, além de não informar a sua identidade, ele não lembra do nome do funcionário. Sabe apenas que,na conversa, moraram 
+-- na mesma cidade e possuem o mesmo nome. Neste contexto, faça as consultas necesárias para identificar o funcionário.
 
 -- 10. Um cliente entra em contato com o gerente solicitando um possível erro de troco. O cliente não lembra o nome do funcionário, 
 -- mas possui as seguintes informações:
@@ -62,6 +62,10 @@ na mesma cidade e possuem o mesmo nome. Neste contexto, faça as consultas neces
  -- (3) cidade onde cliente nasceu: BAURU/SÃO PAULO
  -- (4) a cliente alega estar faltando 30 reais
 -- Neste contexto, faça as consultas necessárias para descobrir o possível nome do funcionário. Justifique!
+
+SELECT funcionario.nome FROM funcionario, cliente, venda WHERE venda.funcionario_id = funcionario.id AND venda.cliente_id = cliente.id AND cliente.cpf_cnpj = "321.109.923-95";
+
 -- 11. De acordo com o projeto do SEU COLEGA, elabore uma consulta RELEVANTE que ajude de alguma forma a empresa. 
 -- A consulta deve envolver mais de 4 tabelas.
- 
+
+SELECT aluno.nome, assistente.nome, emprestimo.data_emprestimo, penalidade.tipo FROM aluno, assistente, emprestimo, penalidade WHERE aluno.id_aluno = emprestimo.id_aluno AND assitente.id_assistente = emprestimo.id_assistente AND emprestimo.id_emprestimo = penalidade.id_emprestimo;
